@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+	<!-- DBCP를 위한 Oracle DB연결설정	 
+	<Resource 
+		auth="Container" 
+		driverClassName="oracle.jdbc.driver.OracleDriver"
+		url="jdbc:oracle:thin:@localhost:1521/orcl"
+		username="dellemc"
+		password="dellemc" 
+		name="jdbc/boardDB"
+		type="javax.sql.DataSource" 	
+		maxTotal="300"
+		maxWaitMillis="5000"
+		maxIdle="100"
+		testOnBorrow="true" 
+	/> -->
+	
+	<!-- DBCP를 위한 Maria DB연결설정 
+	<Resource auth="Container" driverClassName="org.mariadb.jdbc.Driver"
+		maxIdle="100" maxTotal="300" maxWaitMillis="5000" name="jdbc/boardDB"
+		password="root" type="javax.sql.DataSource" url="jdbc:mariadb://localhost:3306/cfdb"
+		username="root" />
+	-->	
+		
+</Context>
