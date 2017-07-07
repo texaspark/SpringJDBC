@@ -10,5 +10,15 @@
 </h1>
 
 <P>  The time on the server is ${serverTime}. </P>
+
+<a href="<%=request.getScheme() + "://" 
+	+ request.getServerName() + ":" 
+	+ request.getServerPort() + 
+	request.getContextPath()+"/list"%>">Board List </a><br><br>
+	
+<a href="<%=request.getScheme() + "://" 
+	+ request.getServerName() + ":" 
+	+ request.getServerPort() + 
+	request.getContextPath()+"/writeView"%>">Board Write View </a><br><br>
 </body>
 </html>
