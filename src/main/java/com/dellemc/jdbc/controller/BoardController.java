@@ -1,23 +1,22 @@
 package com.dellemc.jdbc.controller;
 
 import javax.servlet.http.*;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.*;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.*;
 import org.springframework.ui.*;
 import org.springframework.web.bind.annotation.*;
 
 import com.dellemc.jdbc.command.*;
-//import com.dellemc.jdbc.util.Constant;
 import com.dellemc.jdbc.util.Constant;
 
 @Controller
 public class BoardController {
 	
+	BCommand command;
+	
 	public JdbcTemplate template;
-//	
+ 
 	@Autowired
 	public void setTemplete(JdbcTemplate template) {
 		this.template = template;

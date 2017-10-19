@@ -59,26 +59,25 @@ public class BDao {
 
 		}
 	
-	public void modify(String bId, String bName, String bTitle, String bContent){
+	public void modify(final String bId, final String bName, final String bTitle, final String bContent){
 		
 		String query ="update mvc_board set bName =?, bTitle =?, bContent=? where bId =?";
-		this.template.update(query, new PreparedStatementSetter() {
+		template.update(query, new PreparedStatementSetter() {
 			
 			@Override
 			public void setValues(PreparedStatement ps) throws SQLException {
-				ps.setInt(1, Integer.parseInt(bId));
+				ps.setString(1, bName);
 				ps.setString(2, bTitle);
-				ps.setString(3, bContent);
+		 		ps.setString(3, bContent); 
 				ps.setInt(4, Integer.parseInt(bId));
-
-					}
+					} 
 				});
 		}
 
-	public void delete(String bId){
+	public void delete(final String bId){
 	
 		String query ="delete from mvc_board where bId = ?";
-		this.template.update(query, new PreparedStatementSetter() {
+		template.update(query, new PreparedStatementSetter() {
 			
 			@Override
 			public void setValues(PreparedStatement ps) throws SQLException {
@@ -98,13 +97,13 @@ public class BDao {
 
 	}
 
-	public void reply(String bId, String bName, String bTitle, String bContent, String bGroup, String bStep, String bIndent){
+	public void reply(final String bId, final String bName, final String bTitle, final String bContent, final String bGroup, final String bStep, final String bIndent){
 		
 		replyShape(bGroup, bStep);
 	
 		String query ="insert into mvc_board (bId, bName, bTitle, bContent, bGroup, bStep, bIndent) values (mvc_board_seq.nextval,?, ?, ?, ?, ?, ?)";
 		
-		this.template.update(query, new PreparedStatementSetter() {
+		template.update(query, new PreparedStatementSetter() {
 			
 			@Override
 			public void setValues(PreparedStatement ps) throws SQLException {
@@ -120,11 +119,10 @@ public class BDao {
 
 	}
 		
-	private void replyShape(String strGroup, String strStep) {
+	private void replyShape(final String strGroup, final String strStep) {
 		
 		String query = "update mvc_board set bStep = bStep + 1 where bGroup = ? and bStep > ?";
-		
-		this.template.update(query, new PreparedStatementSetter() {
+		template.update(query, new PreparedStatementSetter() {
 			
 			@Override
 			public void setValues(PreparedStatement ps) throws SQLException {
