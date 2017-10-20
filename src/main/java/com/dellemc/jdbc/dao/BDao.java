@@ -31,30 +31,15 @@ public class BDao {
 	}
 
 	public void write(final String bName, final String bTitle, final String bContent){
-		
-//		this.template.update(new PreparedStatementCreator() {
-//			
-//			@Override
-//			public PreparedStatement createPreparedStatement(Connection con) 
-//					throws SQLException {
+
 		String query = "insert into mvc_board(bId, bName, bTitle, bContent, bHit, bGroup, bStep, bIndent) values (mvc_board_seq.nextval, ?, ?, ?, 0, mvc_board_seq.currval, 0, 0)";
 		template.queryForObject(query, new BeanPropertyRowMapper<BDto>(BDto.class));
-//				template.query(query, new BeanPropertyRowMapper<BDto>(BDto.class));
-//				PreparedStatement pstmt = con.prepareStatement(query);
-//				pstmt.setString(1, bName);
-//				pstmt.setString(2, bTitle);
-//				pstmt.setString(3, bContent);
-//				
-//				return pstmt;
-//			}
-//		});
 	}
 	
 	public BDto contentView(String strID){
 		
 		upHit(strID);
 		String query = "select * from mvc_board where bId = " + strID;
-//		return template.queryForObject(query, ParameterizedBeanPropertyRowMapper.newInstance(BDto.class));
 		return template.queryForObject(query, new BeanPropertyRowMapper<BDto>(BDto.class));
 
 		}
@@ -86,13 +71,11 @@ public class BDao {
 		});
 		
 	}
-	
-//	@SuppressWarnings("deprecation")
+
 	public BDto reply_view(String str) {
 		// TODO Auto-generated method stub
 		
 		String query = "select * from mvc_board where bId = " + str;
-//		return template.queryForObject(query, ParameterizedBeanPropertyRowMapper.newInstance(BDto.class));
 		return template.queryForObject(query, new BeanPropertyRowMapper<BDto>(BDto.class));
 
 	}
@@ -100,9 +83,7 @@ public class BDao {
 	public void reply(final String bId, final String bName, final String bTitle, final String bContent, final String bGroup, final String bStep, final String bIndent){
 		
 		replyShape(bGroup, bStep);
-	
 		String query ="insert into mvc_board (bId, bName, bTitle, bContent, bGroup, bStep, bIndent) values (mvc_board_seq.nextval,?, ?, ?, ?, ?, ?)";
-		
 		template.update(query, new PreparedStatementSetter() {
 			
 			@Override
@@ -137,12 +118,11 @@ public class BDao {
 	private void upHit(final String bId) {
 			
 		String query = "update mvc_board set bHit = bHit + 1 where bId = ?";
-			
 		template.update(query, new PreparedStatementSetter() {
 		
-		@Override
-		public void setValues(PreparedStatement ps) throws SQLException {
-			ps.setInt(1, Integer.parseInt(bId));
+	@Override
+	public void setValues(PreparedStatement ps) throws SQLException {
+		ps.setInt(1, Integer.parseInt(bId));
 				}
 			});
 		}

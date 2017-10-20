@@ -14,7 +14,6 @@ public class BListCommand implements BCommand {
 		// DB���� �޾ƿ� �����͸� jsp page�� DTO ��ü�� �Ѱ� ȭ�鿡 �ѷ��ְ���
 		BDao dao = new BDao();
 		ArrayList<BDto> dto = dao.list();
-		
 		model.addAttribute("list", dto);
 		
 	}
