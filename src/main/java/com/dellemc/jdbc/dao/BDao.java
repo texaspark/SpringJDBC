@@ -30,12 +30,24 @@ public class BDao {
 			
 	}
 
-	public void write(final String bName, final String bTitle, final String bContent){
-
-		String query = "insert into mvc_board(bId, bName, bTitle, bContent, bHit, bGroup, bStep, bIndent) values (mvc_board_seq.nextval, ?, ?, ?, 0, mvc_board_seq.currval, 0, 0)";
-		template.queryForObject(query, new BeanPropertyRowMapper<BDto>(BDto.class));
+	public void write(final String bName, final String bTitle, final String bContent) {
+		// TODO Auto-generated method stub
+		
+		this.template.update(new PreparedStatementCreator() {
+			
+			@Override
+			public PreparedStatement createPreparedStatement(Connection con)
+					throws SQLException {
+				String query = "insert into mvc_board (bId, bName, bTitle, bContent, bHit, bGroup, bStep, bIndent) values (mvc_board_seq.nextval, ?, ?, ?, 0, mvc_board_seq.currval, 0, 0 )";
+				PreparedStatement pstmt = con.prepareStatement(query);
+				pstmt.setString(1, bName);
+				pstmt.setString(2, bTitle);
+				pstmt.setString(3, bContent);
+				return pstmt;
+			}
+		});
 	}
-	
+		
 	public BDto contentView(String strID){
 		
 		upHit(strID);
